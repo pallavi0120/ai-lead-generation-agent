@@ -7,7 +7,7 @@ I chose Task 02 because it allows me to demonstrate my skills in combining web s
 This autonomous AI agent monitors online platforms for buying signals within the Real Estate and PropTech sectors. It identifies companies undergoing digital transformation or adopting tech solutions, classifies their intent using Llama-3, and discovers key people for outreach.
 
 ## Architecture
-The system follows a four-step pipeline:
+The system follows a five-step pipeline:
 1. **Signal Monitoring:** Polls Google News RSS(top 10 from each feed) and scrapes industry-specific news (Inman PropTech) for keywords like 'proptech launch' or 'real estate digital'.
 2. **Intent Classification:** Uses Llama-3.1-8b (via Groq) to analyze each signal for intent (YES/NO), extract the company name, provide a summary of the article, state the reason for choosing that article, and assign an urgency score from 1–10.
 3. **Qualifying Leads:** A company is qualified if it is not from a media domain, is not a media company or government body, is not an invalid company (e.g., "none," "not specified," "n/a," etc.), and the intent is marked as YES.
@@ -65,6 +65,7 @@ Click here to watch demo video - https://drive.google.com/file/d/1XXqlxr69qmAu4N
 **Email Enrichment:** The system finds LinkedIn URLs; adding a service like Hunter.io could help find verified business emails.
 
 **Data Storage:** While CSV/Excel is used for this demo, a production version would utilize a PostgreSQL database for better scalability.
+
 
 
 
