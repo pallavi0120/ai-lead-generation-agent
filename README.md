@@ -1,52 +1,59 @@
-
 # AI Lead Generation Agent (Task 02)
 
-## Overview
+## Why I Chose This Task
+[cite_start]I chose Task 02 because it allows me to demonstrate my skills in combining web scraping with Large Language Models (LLMs) to solve a real-world business problem: manual lead prospecting[cite: 72]. [cite_start]This project showcases how AI can autonomously identify high-intent buying signals and enrich them with professional contact data[cite: 73, 190].
 
-This autonomous AI agent monitors online signals to identify potential leads in the Real Estate and PropTech sectors. It uses RSS feeds and web scraping to find news, classifies the intent and urgency of those signals using Llama-3, and discovers key executives (CEOs/CTOs) via LinkedIn.
+## Overview
+[cite_start]This autonomous AI agent monitors online platforms for buying signals within the Real Estate and PropTech sectors[cite: 70]. [cite_start]It identifies companies undergoing digital transformation or adopting tech solutions, classifies their intent using Llama-3, and discovers key executives for outreach[cite: 72, 75].
 
 ## Architecture
+The system follows a four-step pipeline:
+1. [cite_start]**Signal Monitoring:** Polls Google News RSS and scrapes industry-specific news (Inman PropTech) for keywords like 'proptech launch' or 'real estate digital'[cite: 81, 85].
+2. [cite_start]**Intent Classification:** Uses Llama-3.1-8b (via Groq) to analyze the news for intent (YES/NO), extract company names, and assign an urgency score from 1-10[cite: 87, 88].
+3. [cite_start]**Contact Discovery:** For every qualified lead, the agent performs a targeted search to find the CEO, CTO, or Founder's LinkedIn profile[cite: 90].
+4. [cite_start]**Reporting:** Deduplicates entries and exports a structured lead list to CSV and Excel format[cite: 93, 97].
 
-1. The system follows a four-step pipeline:Signal Monitoring: Polls Google News RSS and scrapes Inman PropTech for relevant keywords.
-2. Intent Classification: Uses an LLM (Groq/Llama-3) to determine if a signal indicates a "buying" opportunity and assigns an urgency score.
-3. Contact Discovery: Searches for executive LinkedIn profiles based on the identified company.
-4. Reporting: Deduplicates data and exports it to a structured CSV and Excel lead list.
+
 
 ## Setup Instructions
 
-1. Prerequisites
-Python 3.8+
-A Groq API Key (for Llama-3 inference)
+### 1. Prerequisites
+* Python 3.8+
+* A Groq API Key (for Llama-3 inference)
 
-2. Installation
+### 2. Installation
 Clone the repository and install the required dependencies:
+```bash
 pip install -r requirements.txt
+```
 
-3. Environment Configuration
-Create a .env file in the root directory and add your Groq API key:
+### 3. Environment Configuration
+Create a .env file in the root directory and add your Groq API key (refer to .env.example):
+
+```bash
 GROQ_API_KEY=your_groq_api_key_here
-
-## Configuration
-
-You can customize the agent's focus by modifying the following variables in the script:
-Keywords/Sources: Update rss_sources or the scrape_proptech_news function to target different industries.
-Filtering: Use the ignore_companies and media_domains lists to filter out news publishers and focus on private companies.
-Ideal Customer Profile (ICP): The agent is currently configured for Real Estate companies adopting PropTech solutions.
+```
 
 ## How to Run
 
 ### Manual Trigger
-
 To run the agent once and generate the lead list immediately:
+
+```bash
 python main.py
+```
 
 ### Scheduled Execution
-
-The script includes a built-in scheduler that runs the agent every 24 hours by default. To keep the agent running, simply leave the script executing in your terminal.
+The script includes an APScheduler that runs the agent every 24 hours by default to ensure the lead list is updated daily.
 
 ## Output
-The agent generates two files:
-leads.csv: An append-only historical log of all leads found.
 
-leads.xlsx: A structured Excel sheet containing the most recent batch of deduplicated leads.
+The agent generates two files in the root directory:
+**leads.csv:** An append-only historical log of all leads discovered.
+**leads.xlsx:** A structured, deduplicated Excel sheet with columns for Company Name, Contact Name, Title, LinkedIn URL, and Intent Score.
 
+## Known Limitations & Future Improvements
+
+**LinkedIn Scraping:** Currently uses DuckDuckGo Search to find public profiles; integrating an official API would increase reliability.
+**Email Enrichment:** The system finds LinkedIn URLs; adding a service like Hunter.io could help find verified business emails.
+**Data Storage:** While CSV/Excel is used for this demo, a production version would utilize a PostgreSQL database for better scalability.
