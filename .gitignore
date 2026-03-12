@@ -1,0 +1,14 @@
+
+# Sensitive Data
+.env
+
+# Python Virtual Environment
+.venv/
+venv/
+ENV/
+pyvenv.cfg
+
+
+# Python Bytecode
+__pycache__/
+*.pyc
