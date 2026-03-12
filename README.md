@@ -1,4 +1,4 @@
-# AI Lead Generation Agent
+# AI Lead Generation Agent (Task-02)
 
 ## Why I Chose This Task
 I chose Task 02 because it allows me to demonstrate my skills in combining web scraping with Large Language Models (LLMs) to solve a real-world business problem: manual lead prospecting.This project showcases how AI can autonomously identify high-intent buying signals and enrich them with professional contact data.
@@ -49,13 +49,18 @@ The script includes an APScheduler that runs the agent every 24 hours by default
 ## Output
 
 The agent generates two files in the root directory:
+
 **leads.csv:** An append-only historical log of all leads discovered.
+
 **leads.xlsx:** A structured, deduplicated Excel sheet with columns for Company Name, Contact Name, Title, LinkedIn URL, and Intent Score.
 
 ## Known Limitations & Future Improvements
 
 **LinkedIn Scraping:** Currently uses DuckDuckGo Search to find public profiles; integrating an official API would increase reliability.
+
 **Email Enrichment:** The system finds LinkedIn URLs; adding a service like Hunter.io could help find verified business emails.
+
 **Data Storage:** While CSV/Excel is used for this demo, a production version would utilize a PostgreSQL database for better scalability.
+
 
 
