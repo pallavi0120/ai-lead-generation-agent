@@ -34,6 +34,14 @@ Insert your Groq API key in the `.env.example` file:
 
 Then, change the file name to `.env`.
 
+## Configuration & Customization
+To tailor the agent to a specific ICP or set of keywords, you can modify the following variables directly in `main.py`:
+**Setting Keywords & Sources:** Update the `rss_sources` list or modify the keywords in the `scrape_proptech_news()` function to target different industry signals.
+**Defining the ICP:** To change the target companies or roles, modify the `ignore_companies` list to filter out specific sectors and update the `find_contact()` search query (currently set to target CEOs, CTOs, and Founders).
+**Intent Parameters:** You can adjust the LLM prompt within the `run_agent()` function to change the criteria for what constitutes a "YES" intent signal.
+**Helper Function Customization:** The logic for verifying lead quality can be adjusted by modifying the helper functions (like `validate_contact` or `is_person_profile`) to enforce stricter matching rules for job titles and LinkedIn profile types.
+**Processing Limits & Timing:** Adjust the number of articles fetched (currently top 10 per source), modify request `timeouts`, or change the `scheduler` interval (defaulted to 24 hours) to control the speed and volume of data collection.
+
 ## How to Run
 
 ### Manual Execution:
@@ -56,6 +64,8 @@ Click here to watch demo video - https://drive.google.com/file/d/1XXqlxr69qmAu4N
 **Note on Live Data & Results:** This system processes real-time RSS feeds and live web signals. Because the agent monitors the most recent news, the leads and "Intent Scores" will vary across different runs (e.g., the demo video vs. the files currently in this repository). Additionally, the system is configured to filter out media domains and specific industry keywords to ensure high-quality, relevant prospecting.
 
 
+
+
 ## Known Limitations & Future Improvements
 
 **LinkedIn Scraping:** Currently uses DuckDuckGo Search to find public profiles; integrating an official API would increase reliability.
@@ -65,6 +75,7 @@ Click here to watch demo video - https://drive.google.com/file/d/1XXqlxr69qmAu4N
 **Email Enrichment:** The system finds LinkedIn URLs; adding a service like Hunter.io could help find verified business emails.
 
 **Data Storage:** While CSV/Excel is used for this demo, a production version would utilize a PostgreSQL database for better scalability.
+
 
 
 
